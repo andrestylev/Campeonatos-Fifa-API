@@ -17,4 +17,25 @@ public class PaisServicio {
     public List<Pais> listar(){
         return repositorio.findAll();
     }
+    public Pais agregar(Pais pais) {
+        pais.setId(0);
+        return repositorio.save(pais);
+    }
+
+    public Pais modificar(Pais pais) {
+        if (repositorio.findById(pais.getId()).isPresent()) {
+            return repositorio.save(pais);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean eliminar(int id) {
+        try {
+            repositorio.deleteById(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 }
